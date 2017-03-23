@@ -54,11 +54,11 @@ class webApp:
             print('HTTP request received (going to parse and process):')
             request = recvSocket.recv(2048).decode('utf-8')
             print(request)
-            parsedRequest = self.parse(request)
-            (returnCode, htmlAnswer) = self.process(parsedRequest)
+            met, rec = self.parse(request)
+            (returnCode, htmlAnswer) = self.process(met, rec)
             print('Answering back...')
-            recvSocket.send(bytes("HTTP/1.1 " + returnCode + " \r\n\r\n"
-                            + htmlAnswer + "\r\n", 'utf-8'))
+            recvSocket.send(bytes("HTTP/1.1 " + returnCode + " \r\n\r\n", 'utf-8')
+                            + htmlAnswer + bytes("\r\n", 'utf-8'))
             recvSocket.close()
 
 if __name__ == "__main__":
