@@ -55,7 +55,7 @@ class webApp:
             request = recvSocket.recv(2048).decode('utf-8')
             print(request)
             met, rec = self.parse(request)
-            (returnCode, htmlAnswer) = self.process(met, rec)
+            (returnCode, htmlAnswer) = self.process(met, rec, request)
             print('Answering back...')
             recvSocket.send(bytes("HTTP/1.1 " + returnCode + " \r\n\r\n", 'utf-8')
                             + htmlAnswer + bytes("\r\n", 'utf-8'))
